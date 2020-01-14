@@ -5,11 +5,12 @@ from netCDF4 import num2date
 import datetime
 from mpl_toolkits.basemap import Basemap
 import matplotlib
+import palettable
 matplotlib.use("Agg")
 nc = Ncdf('ta_2m_diurnal_mean_d02_2009-2018.nc', 'r')
 nc90 = Ncdf('ta_2m_diurnal_mean_d02_2090-2099.nc', 'r')
-for i in nc.variables:
-    print(i, nc.variables[i].units, nc.variables[i].shape)
+# for i in nc.variables:
+#     print(i, nc.variables[i].units, nc.variables[i].shape)
 lons = nc.variables['lon'][:]
 lats = nc.variables['lat'][:]
 time = nc.variables['time'][:]
@@ -23,10 +24,12 @@ t290 = nc90.variables['ta_2m'][:]
 t_units90 = nc90.variables['time'].units
 temp_c90 = t290
 diff = t2
-for j in range(0, 23):
+max = -43892184
+min = 843924
+for j in range(0, 24):
     print(j)
-    for k in range(0, 698):
-        for d in range(0, 599):
+    for k in range(0, 699):
+        for d in range(0, 600):
             temp_c[j,k,d] = t2[j,k,d] - 273.15
             temp_c90[j, k, d] = t290[j, k, d] - 273.15
             diff[j,k,d] = temp_c90[j,k,d] - temp_c[j,k,d]
@@ -40,16 +43,16 @@ map = Basemap(projection='merc', llcrnrlon=lons[0], llcrnrlat=lats[0], urcrnrlon
 # map.drawlsmask(land_color='Linen', ocean_color='#CCFFFF')
 lon2, lat2 = np.meshgrid(lons, lats)
 x, y = map(lon2, lat2)
+
+plt.figure(figsize=(601/100, 700/100))
 plt.gca().set_axis_off()
 plt.subplots_adjust(top=1, bottom=0, right=1, left=0,
                     hspace=0, wspace=0)
 plt.margins(0, 0)
-map.pcolormesh(x, y, diff[0, :, :], cmap='bwr')
-plt.colorbar(label="Temperature (Celsius)")
-plt.clim(-5,5)
+#plt.colorbar(label="Temperature (Celsius)")
 for b in range(0, 1):
-    map.pcolormesh(x, y, diff[b, :, :], cmap='bwr')
+    map.pcolormesh(x, y, diff[b, :, :], cmap='bwr', vmin=-6, vmax=6)
     #plt.title('2m Temperature on %s' % datevar[b])
-    plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/diurnal/ta2m_diurnal_mean_diff_2090-2099_%s.png" % b, transparent='True',
+    plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/diurnal/ta2m_diurnal_mean_diff_2090-2099_bwr_%s.png" % b, transparent='True',
                 bbox_inches='tight', pad_inches=0)
     print('saved %s' % b)
