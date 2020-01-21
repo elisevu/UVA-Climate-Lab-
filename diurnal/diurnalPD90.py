@@ -50,9 +50,12 @@ plt.subplots_adjust(top=1, bottom=0, right=1, left=0,
                     hspace=0, wspace=0)
 plt.margins(0, 0)
 #plt.colorbar(label="Temperature (Celsius)")
-for b in range(0, 1):
+for b in range(0, 24):
     map.pcolormesh(x, y, diff[b, :, :], cmap='bwr', vmin=-6, vmax=6)
     #plt.title('2m Temperature on %s' % datevar[b])
-    plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/diurnal/ta2m_diurnal_mean_diff_2090-2099_bwr_%s.png" % b, transparent='True',
+    plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/diurnal/ta2m_diurnal_mean_diff_2090-2099_%s.png" % b, transparent='True',
                 bbox_inches='tight', pad_inches=0)
     print('saved %s' % b)
+plt.colorbar(label="Difference in Temperature (Celsius)")
+plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/diurnal/ta2m_diurnal_mean_diff_2090-2099_KEY_%s.png" % b, transparent='True',
+            bbox_inches='tight', pad_inches=0)

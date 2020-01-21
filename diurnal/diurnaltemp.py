@@ -48,8 +48,11 @@ plt.margins(0, 0)
 
 
 for b in range(0, 24):
-    map.pcolormesh(x, y, temp_c[b, :, :], cmap='rainbow', vmin=-5, vmax=40)
+    map.pcolormesh(x, y, temp_c[b, :, :], cmap='gist_rainbow_r', vmin=-5, vmax=40)
     # plt.title('2m Temperature on %s' % datevar[b])
-    plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/diurnal/ta2m_diurnal_mean_nokey_%s.png" % b, transparent='True',
+    plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/diurnal/ta2m_diurnal_mean_%s.png" % b, transparent='True',
                 bbox_inches='tight', pad_inches=0)
     print('saved %s' % b)
+plt.colorbar(label="Temperature (Celsius)")
+plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/diurnal/ta2m_diurnal_mean_KEY.png", transparent='True',
+            bbox_inches='tight', pad_inches=0)
