@@ -31,6 +31,20 @@ for j in range(0, 24):
 print(max)
 print(min)
 
+cmap = plt.get_cmap('gist_rainbow_r')
+
+
+def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=100):
+    new_cmap = colors.LinearSegmentedColormap.from_list(
+        'trunc({n},{a:.2f},{b:.2f})'.format(n=cmap.name, a=minval, b=maxval),
+        cmap(np.linspace(minval, maxval, n)))
+    new_cmap.set_under('white', 1.0)  # 1.0 represents not transparent
+    new_cmap.set_bad('white')
+    return new_cmap
+
+
+cmap2 = truncate_colormap(cmap, 0.08, 1.0)
+
 datevar = num2date(time[:], units='hours since 1970-01-01 00:00:00', calendar='standard')
 mapp = Basemap(projection='merc', llcrnrlon=lons[0], llcrnrlat=lats[0], urcrnrlon=lons[599], urcrnrlat=lats[698],
                resolution='i')
@@ -44,7 +58,7 @@ plt.margins(0, 0)
 
 # plt.title('2m Temperature on %s' % datevar[b])
 for b in range(0, 24):
-    mapp.pcolormesh(x, y, rr[b, :, :], cmap='gist_rainbow', vmin=0, vmax=6)
+    mapp.pcolormesh(x, y, rr[b, :, :], cmap=cmap2, vmin=0, vmax=6)
     # plt.title('2m Temperature on %s' % datevar[b])
     plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/diurnal/precip_diurnal_2009-2018_%s.png" % b, transparent='True',
                 bbox_inches='tight', pad_inches=0)
