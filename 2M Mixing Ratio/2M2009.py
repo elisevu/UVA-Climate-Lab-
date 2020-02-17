@@ -19,7 +19,7 @@ t_units = nc.variables['time'].units
 datevar = num2date(time[:], units='hours since 1970-01-01 00:00:00', calendar='standard')
 print(datevar[:])
 map = Basemap(projection='merc', llcrnrlon=lons[0], llcrnrlat=lats[0], urcrnrlon=lons[599], urcrnrlat=lats[698],
-              resolution='i')
+          resolution='i')
 
 lon2, lat2 = np.meshgrid(lons, lats)
 x, y = map(lon2, lat2)
