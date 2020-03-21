@@ -8,7 +8,10 @@ from netCDF4 import num2date
 matplotlib.use("Agg")
 nc = Ncdf('daily_temperature_month_d02_2009-2018.nc', 'r')
 n90 = Ncdf('daily_temperature_month_d02_2090-2099.nc', 'r')
-
+for i in nc.variables:
+    print(i, nc.variables[i])
+for x in n90.variables:
+    print(x, n90.variables[x])
 month = nc.variables['month'][:]
 lons = nc.variables['lon'][:]
 lats = nc.variables['lat'][:]

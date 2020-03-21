@@ -25,15 +25,15 @@ temp_c55 = t255
 diff = t2
 max  = -478324
 min = 7489324
-for j in range(0, 24):
-    print(j)
-    for k in range(0, 699):
-        for d in range(0, 600):
-            temp_c[j,k,d] = t2[j,k,d] - 273.15
-            temp_c55[j, k, d] = t255[j, k, d] - 273.15
-            diff[j,k,d] = temp_c55[j, k, d] - temp_c[j, k, d]
+# for j in range(0, 24):
+#     print(j)
+#     for k in range(0, 699):
+#         for d in range(0, 600):
+#             temp_c[j,k,d] = t2[j,k,d] - 273.15
+#             temp_c55[j, k, d] = t255[j, k, d] - 273.15
+#             diff[j,k,d] = temp_c55[j, k, d] - temp_c[j, k, d]
 datevar = num2date(time[:], units='hours since 1970-01-01 00:00:00', calendar='standard')
-# print(datevar[:])
+print(datevar[:])
 map = Basemap(projection='merc', llcrnrlon=lons[0], llcrnrlat=lats[0], urcrnrlon=lons[599], urcrnrlat=lats[698],
               resolution='i')
 # map.drawcoastlines()
