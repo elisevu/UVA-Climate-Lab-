@@ -49,10 +49,12 @@ def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=117):
 
 
 cmap2 = truncate_colormap(cmap, 0.2, 1.0)
-
+fig, ax = plt.subplots()
 for b in range(0, 1):
     map.pcolormesh(x, y, ws[b, :, :], cmap=cmap2, vmin=0, vmax=15)
-    plt.quiver(x, y, u10[b, :, :], v10[b, :, :], scale=500)
+    for c in range(0, 699, 10):
+        for d in range(0, 600, 10):
+            q = ax.quiver(c, d, u10[b, c, d], v10[b, c, d])
     # plt.title('2m Temperature on %s' % datevar[b])
     plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/diurnal/wind_diurnal_mean_%s.png" % b, transparent='True',
                 bbox_inches='tight', pad_inches=0)
