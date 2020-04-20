@@ -4,7 +4,7 @@ import matplotlib.colors as colors
 from netCDF4 import Dataset as Ncdf
 from mpl_toolkits.basemap import Basemap
 import matplotlib
-
+# CREATE DIRECTORIES /precip_amnt_freq_month_2055_2064_cat0_maps/ for cat0 - cat3
 matplotlib.use("Agg")
 nc = Ncdf('precip_exc_freq_d02_2055-2064.nc', 'r')
 print(nc)
@@ -43,7 +43,7 @@ for b in range(0, 12):
         # plt.title('2m Temperature on %s' % datevar[b])
 
         mapp.pcolormesh(x, y, precip[c, b, :, :], cmap="Blues", vmin=0, vmax=100)
-        plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/month/precip_amnt_freq_month_2055_2064_cat%s_maps/"
+        plt.savefig("precip_amnt_freq_month_2055_2064_cat%s_maps/"
                     "precip_amnt_freq_month_2055_2064_%s_%s.png" % (c, c, b+1),
                     transparent='True',
                     bbox_inches='tight', pad_inches=0)
@@ -53,28 +53,28 @@ for b in range(0, 12):
 mapp.pcolormesh(x, y, precip[0, 1, :, :], cmap="Blues", vmin=0, vmax=100)
 plt.title("Percentage of Days with Precipitation Less than 0.5 mm/day")
 plt.colorbar(label="Percent")
-plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/month/precip_amnt_freq_month_2055_2064_cat0_maps/"
+plt.savefig("precip_amnt_freq_month_2055_2064_cat0_maps/"
             "precip_amnt_freq_month_2055_2064_0_KEY.png", transparent='True',
             bbox_inches='tight', pad_inches=0)
 plt.clf()
 mapp.pcolormesh(x, y, precip[1, 1, :, :], cmap="Blues", vmin=0, vmax=100)
 plt.title("Percentage of Days with Precipitation Less than 0.5 mm/day")
 plt.colorbar(label="Percent")
-plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/month/precip_amnt_freq_month_2055_2064_cat1_maps/"
+plt.savefig("precip_amnt_freq_month_2055_2064_cat1_maps/"
             "precip_amnt_freq_month_2055_2064_0_KEY.png", transparent='True',
             bbox_inches='tight', pad_inches=0)
 plt.clf()
 mapp.pcolormesh(x, y, precip[2, 1, :, :], cmap="Blues", vmin=0, vmax=100)
 plt.title("Percentage of Days with Precipitation Less than 0.5 mm/day")
 plt.colorbar(label="Percent")
-plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/month/precip_amnt_freq_month_2055_2064_cat2_maps/"
+plt.savefig("precip_amnt_freq_month_2055_2064_cat2_maps/"
             "precip_amnt_freq_month_2055_2064_0_KEY.png", transparent='True',
             bbox_inches='tight', pad_inches=0)
 plt.clf()
 mapp.pcolormesh(x, y, precip[3, 1, :, :], cmap="Blues", vmin=0, vmax=100)
 plt.title("Percentage of Days with Precipitation Less than 0.5 mm/day")
 plt.colorbar(label="Percent")
-plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/month/precip_amnt_freq_month_2055_2064_cat3_maps/"
+plt.savefig("precip_amnt_freq_month_2055_2064_cat3_maps/"
             "precip_amnt_freq_month_2055_2064_0_KEY.png", transparent='True',
             bbox_inches='tight', pad_inches=0)
 plt.clf()
