@@ -50,7 +50,7 @@ plt.margins(0, 0)
 cmap = plt.get_cmap('gist_rainbow_r')
 
 
-def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=117):
+def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=100):
     new_cmap = colors.LinearSegmentedColormap.from_list(
         'trunc({n},{a:.2f},{b:.2f})'.format(n=cmap.name, a=minval, b=maxval),
         cmap(np.linspace(minval, maxval, n)))
