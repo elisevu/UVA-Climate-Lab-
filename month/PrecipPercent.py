@@ -24,7 +24,8 @@ plt.gca().set_axis_off()
 plt.subplots_adjust(top=1, bottom=0, right=1, left=0,
                     hspace=0, wspace=0)
 plt.margins(0, 0)
-cmap = plt.get_cmap('gist_rainbow')
+cmap = plt.get_cmap('nipy_spectral_r')
+cmapr = plt.get_cmap('nipy_spectral')
 
 
 def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=100):
@@ -36,46 +37,66 @@ def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=100):
     return new_cmap
 
 
-cmap2 = truncate_colormap(cmap, 0.0, .85)
+cmap2 = truncate_colormap(cmap, 0.15, .85)
+cmap3 = truncate_colormap(cmapr, 0.15, 0.85)
 mapp.pcolormesh(x, y, precip[0, 1, :, :], cmap=cmap2, vmin=0, vmax=100)
 plt.title("Percentage of Days with Precipitation Less than 0.5 mm/day")
 plt.colorbar(label="Percent")
 plt.savefig("precip_amnt_freq_month_2055_2064_cat0_maps/"
-            "precip_amnt_freq_month_2055_2064_0_KEY.png", transparent='True',
+            "precip_amnt_freq_month_2055_2064_1_KEY.png", transparent='True',
             bbox_inches='tight', pad_inches=0)
 plt.clf()
-mapp.pcolormesh(x, y, precip[1, 1, :, :], cmap=cmap2, vmin=0, vmax=100)
+print('saved cat 1 key')
+mapp.pcolormesh(x, y, precip[0, 1, :, :], cmap=cmap3, vmin=0, vmax=100)
 plt.title("Percentage of Days with Precipitation Less than 0.5 mm/day")
+plt.colorbar(label="Percent")
+plt.savefig("precip_amnt_freq_month_2055_2064_cat0_maps/"
+            "precip_amnt_freq_month_2055_2064_1_KEY_R.png", transparent='True',
+            bbox_inches='tight', pad_inches=0)
+plt.clf()
+print('saved cat 1 key reverse')
+
+mapp.pcolormesh(x, y, precip[1, 1, :, :], cmap=cmap2, vmin=0, vmax=100)
+plt.title("Percentage of Days with Precipitation Greater than 0.5 mm/day")
 plt.colorbar(label="Percent")
 plt.savefig("precip_amnt_freq_month_2055_2064_cat1_maps/"
-            "precip_amnt_freq_month_2055_2064_0_KEY.png", transparent='True',
+            "precip_amnt_freq_month_2055_2064_2_KEY.png", transparent='True',
             bbox_inches='tight', pad_inches=0)
 plt.clf()
+print('saved cat 2 key')
 mapp.pcolormesh(x, y, precip[2, 1, :, :], cmap=cmap2, vmin=0, vmax=100)
-plt.title("Percentage of Days with Precipitation Less than 0.5 mm/day")
+plt.title("Percentage of Days with Precipitation Greater than 5 mm/day")
 plt.colorbar(label="Percent")
 plt.savefig("precip_amnt_freq_month_2055_2064_cat2_maps/"
-            "precip_amnt_freq_month_2055_2064_0_KEY.png", transparent='True',
+            "precip_amnt_freq_month_2055_2064_3_KEY.png", transparent='True',
             bbox_inches='tight', pad_inches=0)
 plt.clf()
+print('saved cat 3 key')
 mapp.pcolormesh(x, y, precip[3, 1, :, :], cmap=cmap2, vmin=0, vmax=100)
-plt.title("Percentage of Days with Precipitation Less than 0.5 mm/day")
+plt.title("Percentage of Days with Precipitation Greater than 25 mm/day")
 plt.colorbar(label="Percent")
 plt.savefig("precip_amnt_freq_month_2055_2064_cat3_maps/"
-            "precip_amnt_freq_month_2055_2064_0_KEY.png", transparent='True',
+            "precip_amnt_freq_month_2055_2064_4_KEY.png", transparent='True',
             bbox_inches='tight', pad_inches=0)
+print('saved cat 4 key')
 plt.clf()
 # # plt.title('Daily Precip Mean over Month of X')
-for b in range(0, 12):
-    for c in range(0, 4):
+for c in range(0, 4):
+    for b in range(0, 12):
         # plt.title('2m Temperature on %s' % datevar[b])
-
+        if c == 0:
+            mapp.pcolormesh(x, y, precip[c, b, :, :], cmap=cmap3, vmin=0, vmax=100)
+            plt.savefig("precip_amnt_freq_month_2055_2064_cat%s_maps/"
+                        "precip_amnt_freq_month_2055_2064_%s_%s_R.png" % (c, c, b + 1),
+                        transparent='True',
+                        bbox_inches='tight', pad_inches=0)
+            print('saved cat %s month %s RE' % (c, b))
         mapp.pcolormesh(x, y, precip[c, b, :, :], cmap=cmap2, vmin=0, vmax=100)
         plt.savefig("precip_amnt_freq_month_2055_2064_cat%s_maps/"
                     "precip_amnt_freq_month_2055_2064_%s_%s.png" % (c, c, b+1),
                     transparent='True',
                     bbox_inches='tight', pad_inches=0)
-    print('saved %s' % b)
+        print('saved cat %s month %s' % (c, b))
     plt.clf()
 
 
