@@ -6,7 +6,7 @@ from mpl_toolkits.basemap import Basemap
 import matplotlib
 # CREATE DIRECTORIES /precip_amnt_freq_month_2055_2064_cat0_maps/ for cat0 - cat3
 matplotlib.use("Agg")
-nc = Ncdf('precip_exc_freq_d02_2090-2099.nc', 'r')
+nc = Ncdf('precip_exc_freq_d02_2055-2064.nc', 'r')
 print(nc)
 print(nc.variables["category"][:])
 lons = nc.variables['lon'][:]
@@ -42,16 +42,16 @@ cmap3 = truncate_colormap(cmapr, 0.15, 1.0)
 mapp.pcolormesh(x, y, precip[0, 1, :, :], cmap=cmap2, vmin=0, vmax=100)
 plt.title("Percentage of Days with Precipitation Less than 0.5 mm/day")
 plt.colorbar(label="Percent")
-plt.savefig("precip_amnt_freq_month_2090_2099_cat0_maps/"
-            "precip_amnt_freq_month_2090_2099_0_KEY.png", transparent='True',
+plt.savefig("precip_amnt_freq_month_2055_2064_cat0_maps/"
+            "precip_amnt_freq_month_2055_2064_0_KEY.png", transparent='True',
             bbox_inches='tight', pad_inches=0)
 plt.clf()
 print('saved cat 1 key')
 mapp.pcolormesh(x, y, precip[0, 1, :, :], cmap=cmap3, vmin=0, vmax=100)
 plt.title("Percentage of Days with Precipitation Less than 0.5 mm/day")
 plt.colorbar(label="Percent")
-plt.savefig("precip_amnt_freq_month_2090_2099_cat0_maps/reverse/"
-            "precip_amnt_freq_month_2090_2099_0_KEY_R.png", transparent='True',
+plt.savefig("precip_amnt_freq_month_2055_2064_cat0_maps/reversed/"
+            "precip_amnt_freq_month_2055_2064_0_KEY_R.png", transparent='True',
             bbox_inches='tight', pad_inches=0)
 plt.clf()
 print('saved cat 1 key reverse')
@@ -59,24 +59,24 @@ print('saved cat 1 key reverse')
 mapp.pcolormesh(x, y, precip[1, 1, :, :], cmap=cmap2, vmin=0, vmax=100)
 plt.title("Percentage of Days with Precipitation Greater than 0.5 mm/day")
 plt.colorbar(label="Percent")
-plt.savefig("precip_amnt_freq_month_2090_2099_cat1_maps/"
-            "precip_amnt_freq_month_2090_2099_1_KEY.png", transparent='True',
+plt.savefig("precip_amnt_freq_month_2055_2064_cat1_maps/"
+            "precip_amnt_freq_month_2055_2064_1_KEY.png", transparent='True',
             bbox_inches='tight', pad_inches=0)
 plt.clf()
 print('saved cat 2 key')
 mapp.pcolormesh(x, y, precip[2, 1, :, :], cmap=cmap2, vmin=0, vmax=100)
 plt.title("Percentage of Days with Precipitation Greater than 5 mm/day")
 plt.colorbar(label="Percent")
-plt.savefig("precip_amnt_freq_month_2090_2099_cat2_maps/"
-            "precip_amnt_freq_month_2090_2099_2_KEY.png", transparent='True',
+plt.savefig("precip_amnt_freq_month_2055_2064_cat2_maps/"
+            "precip_amnt_freq_month_2055_2064_2_KEY.png", transparent='True',
             bbox_inches='tight', pad_inches=0)
 plt.clf()
 print('saved cat 3 key')
 mapp.pcolormesh(x, y, precip[3, 1, :, :], cmap=cmap2, vmin=0, vmax=100)
 plt.title("Percentage of Days with Precipitation Greater than 25 mm/day")
 plt.colorbar(label="Percent")
-plt.savefig("precip_amnt_freq_month_2090_2099_cat3_maps/"
-            "precip_amnt_freq_month_2090_2099_3_KEY.png", transparent='True',
+plt.savefig("precip_amnt_freq_month_2055_2064_cat3_maps/"
+            "precip_amnt_freq_month_2055_2064_3_KEY.png", transparent='True',
             bbox_inches='tight', pad_inches=0)
 print('saved cat 4 key')
 plt.clf()
@@ -86,14 +86,14 @@ for c in range(0, 4):
         # plt.title('2m Temperature on %s' % datevar[b])
         if c == 0:
             mapp.pcolormesh(x, y, precip[c, b, :, :], cmap=cmap3, vmin=0, vmax=100)
-            plt.savefig("precip_amnt_freq_month_2090_2099_cat%s_maps/reverse/"
-                        "precip_amnt_freq_month_2090_2099_%s_%s_R.png" % (c, c, b + 1),
+            plt.savefig("precip_amnt_freq_month_2055_2064_cat%s_maps/reversed/"
+                        "precip_amnt_freq_month_2055_2064_%s_%s_R.png" % (c, c, b + 1),
                         transparent='True',
                         bbox_inches='tight', pad_inches=0)
             print('saved cat %s month %s RE' % (c, b))
         mapp.pcolormesh(x, y, precip[c, b, :, :], cmap=cmap2, vmin=0, vmax=100)
-        plt.savefig("precip_amnt_freq_month_2090_2099_cat%s_maps/"
-                    "precip_amnt_freq_month_2090_2099_%s_%s.png" % (c, c, b+1),
+        plt.savefig("precip_amnt_freq_month_2055_2064_cat%s_maps/"
+                    "precip_amnt_freq_month_2055_2064_%s_%s.png" % (c, c, b+1),
                     transparent='True',
                     bbox_inches='tight', pad_inches=0)
         print('saved cat %s month %s' % (c, b))

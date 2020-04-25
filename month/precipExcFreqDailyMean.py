@@ -64,17 +64,17 @@ cmap2 = truncate_colormap(cmap, 0.08, 1.0)
 for b in range(0, 12):
     mapp.pcolormesh(x, y, mean[b, :, :], cmap=cmap2, vmin=0, vmax=117)
     # plt.title('2m Temperature on %s' % datevar[b])
-    plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/month/precip_monthly_mean_2009-2018_maps"
+    plt.savefig("precip_monthly_mean_2009-2018_maps"
                 "/precip_monthly_mean_2009-2018_%s.png" % b,
                 transparent='True',
                 bbox_inches='tight', pad_inches=0)
     mapp.pcolormesh(x, y, diff55[b, :, :], cmap='bwr', vmin=-40, vmax=40)
-    plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/month/precip_monthly_diff_2055-2064_maps/"
+    plt.savefig("precip_monthly_diff_2055-2064_maps/"
                 "precip_monthly_diff_2055-2064_%s.png" % b,
                 transparent='True',
                 bbox_inches='tight', pad_inches=0)
     mapp.pcolormesh(x, y, diff90[b, :, :], cmap='bwr', vmin=-40, vmax=40)
-    plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/month/precip_monthly_diff_2090-2099_maps/"
+    plt.savefig("precip_monthly_diff_2090-2099_maps/"
                 "precip_monthly_diff_2090-2099_%s.png" % b,
                 transparent='True',
                 bbox_inches='tight', pad_inches=0)
@@ -82,18 +82,18 @@ for b in range(0, 12):
     plt.clf()
 mapp.pcolormesh(x, y, mean[1, :, :], cmap=cmap2, vmin=0, vmax=117)
 plt.colorbar(label="Mean Rainfall Rate (mm/day)")
-plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/month/precip_monthly_mean_2009-2018_maps/"
+plt.savefig("precip_monthly_mean_2009-2018_maps/"
             "precip_monthly_mean_2009-2018_KEY.png", transparent='True',
             bbox_inches='tight', pad_inches=0)
 plt.clf()
 mapp.pcolormesh(x, y, diff55[1, :, :], cmap='bwr', vmin=-40, vmax=40)
 plt.colorbar(label="Difference in Mean Rainfall Rate (mm/day)")
-plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/month/precip_monthly_diff_2055-2064_maps"
+plt.savefig("precip_monthly_diff_2055-2064_maps"
             "precip_monthly_diff_2055-2064_KEY.png", transparent='True',
             bbox_inches='tight', pad_inches=0)
 plt.clf()
 mapp.pcolormesh(x, y, diff90[1, :, :], cmap='bwr', vmin=-40, vmax=40)
 plt.colorbar(label="Difference in Mean Rainfall Rate (mm/day)")
-plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/month/precip_monthly_diff_2090-2099_maps/"
+plt.savefig("precip_monthly_diff_2090-2099_maps/"
             "precip_monthly_diff_2090-2099_KEY.png", transparent='True',
             bbox_inches='tight', pad_inches=0)

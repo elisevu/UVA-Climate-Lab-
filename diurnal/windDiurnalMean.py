@@ -9,21 +9,22 @@ import matplotlib
 matplotlib.use("Agg")
 ua = Ncdf('ua_10m_diurnal_mean_d02_2009-2018.nc', 'r')
 va = Ncdf('va_10m_diurnal_mean_d02_2009-2018.nc', 'r')
-print(ua)
-print(va)
-for i in ua.variables:
-    print(i, ua.variables[i].units, ua.variables[i].shape)
-for x in va.variables:
-    print(x, va.variables[x].units, va.variables[x].shape)
+ua55 = Ncdf('ua_10m_diurnal_mean_d02_2055-2064.nc', 'r')
+va55 = Ncdf('va_10m_diurnal_mean_d02_2055-2064.nc', 'r')
+ua90 = Ncdf('ua_10m_diurnal_mean_d02_2090-2099.nc', 'r')
+va90 = Ncdf('va_10m_diurnal_mean_d02_2090-2099.nc', 'r')
+print(ua55)
 lons = ua.variables['lon'][:]
 lats = ua.variables['lat'][:]
-time = ua.variables['time'][:]
-u10 = ua.variables['ua_10m'][:]
-v10 = va.variables['va_10m'][:]
-ws = np.sqrt(u10[:] ** 2 + v10[:] ** 2)
 
+time = ua.variables['time'][:]
+u10 = np.array(ua.variables['ua_10m'][:])
+v10 = np.array(va.variables['va_10m'][:])
+ws = np.sqrt(u10[:] ** 2 + v10[:] ** 2)
+print("wind speed")
 print(np.amax(ws))
 print(np.amin(ws))
+
 
 # datevar = num2date(time[:], units='hours since 1970-01-01 00:00:00', calendar='standard')
 # print(datevar[:])
@@ -48,19 +49,24 @@ def truncate_colormap(cmap, minval=0.0, maxval=1.0, n=117):
     return new_cmap
 
 
-cmap2 = truncate_colormap(cmap, 0.2, 1.0)
-fig, ax = plt.subplots()
-for b in range(0, 1):
-    map.pcolormesh(x, y, ws[b, :, :], cmap=cmap2, vmin=0, vmax=15)
-    for c in range(0, 699, 10):
-        for d in range(0, 600, 10):
-            q = ax.quiver(c, d, u10[b, c, d], v10[b, c, d])
-    # plt.title('2m Temperature on %s' % datevar[b])
-    plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/diurnal/wind_diurnal_mean_%s.png" % b, transparent='True',
-                bbox_inches='tight', pad_inches=0)
+cmap2 = truncate_colormap(cmap, 0.0, 1.0)
+
+map.pcolormesh(x, y, ws[0, :, :], cmap=cmap, vmin=0, vmax=15)
+plt.colorbar(label="Wind Speed and Direction m/s")
+q = plt.quiver(x[::20, ::20], y[::20, ::20], u10[0, ::20, ::20], v10[0, ::20, ::20], color="black")
+qk = plt.quiverkey(q, 0.7, 0.95, 1, r'$2 \frac{m}{s}$', labelpos='E', coordinates='figure')
+
+plt.savefig("wind_diurnal_mean/wind_diurnal_mean_KEY.png",
+            transparent='True',
+            bbox_inches='tight', pad_inches=0.5)
+print('saved mean key')
+plt.clf()
+for b in range(0, 24):
+    map.pcolormesh(x, y, ws[b, :, :], cmap=cmap, vmin=0, vmax=15)
+    q = plt.quiver(x[::20, ::20], y[::20, ::20], u10[b, ::20, ::20], v10[b, ::20, ::20], color="black")
+    plt.savefig("wind_diurnal_mean/wind_diurnal_mean_%s.png" % b,
+                transparent='True', bbox_inches='tight', pad_inches=0)
+
     print('saved %s' % b)
     plt.clf()
-map.pcolormesh(x, y, ws[0, :, :], cmap=cmap2, vmin=0, vmax=15)
-plt.colorbar(label="Wind Speed and Direction m/s")
-plt.savefig("E:/elise/Documents/UVA-Climate-Lab-/diurnal/wind_diurnal_mean_KEY.png", transparent='True',
-            bbox_inches='tight', pad_inches=0)
+
